@@ -1,8 +1,12 @@
+import { STG_Environment } from './config/stg_environment';
+import { DEV_Environment } from './config/dev_environment';
 import { App } from "cdktf";
 import { EC2Stack } from './lib/EC2-stack';
-import dev_environment from './enums/environments/dev_environment';
+
 const app = new App();
-new EC2Stack(app, "aws_instance", {
-  ...dev_environment
-});
+
+new EC2Stack(app, "cdk-demo-instance-dev", DEV_Environment);
+
+new EC2Stack(app, "cdk-demo-instance-stg", STG_Environment);
+
 app.synth();
